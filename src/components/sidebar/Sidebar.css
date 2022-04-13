@@ -4,6 +4,10 @@
   padding: 10px;
   width: 250px;
 }
+.sidebar__Link {
+  text-decoration: none;
+  color: #000;
+}
 
 .sidebar__title {
   letter-spacing: 0.1rem;

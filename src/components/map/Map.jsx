@@ -1,23 +1,30 @@
-import { useEffect, useRef, useState } from "react";
+import { GoogleMap, Marker } from "@react-google-maps/api";
+//Router
+import { useNavigate } from "react-router-dom";
 
-const Map = ({ center, zoom }) => {
-  const ref = useRef();
+import "./Map.css";
 
-  useEffect(() => {
-    new window.google.maps.Map(ref.current, {
-      center,
-      zoom,
-    });
-  });
+const Map = ({ spots, spotDetails }) => {
+  const navigate = useNavigate();
 
+  console.log(spots);
   return (
-    <div
-      ref={ref}
-      id="map"
-      style={{
-        height: "100vh",
-      }}
-    />
+    <GoogleMap
+      zoom={15}
+      center={{ lat: 19.42847, lng: -99.12766 }}
+      mapContainerClassName="map"
+    >
+      {spots.map((spot) => (
+        <Marker
+          key={spot.id}
+          position={{ lat: spot.latitude, lng: spot.longitude }}
+          onClick={() => {
+            spotDetails(spot.id);
+            navigate(`/invoices/${spot.id}`);
+          }}
+        />
+      ))}
+    </GoogleMap>
   );
 };
 
